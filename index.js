@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const conectarDB = require("./config/db");
 const home = require("./routes/home");
 const authRoutes = require("./routes/auth");
+const taskRoutes = require("./routes/task");
+
+const port = process.env.PORT || 3000;
 
 // Creación del servidor
 const app = express();
@@ -19,7 +22,8 @@ mongoose.connect(process.env.DB_MONGO, {
 
 app.use("/api/home", home);
 app.use("/api/auth", authRoutes);
+app.use("/api/task", taskRoutes);
 
-app.listen(4000, () => {
-  console.log("El servidor esta corriendo en el puerto 4000");
+app.listen(port, () => {
+  console.log(`Servidor escuchando en el puerto ${port}`);
 });
