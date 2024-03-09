@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
 
+const taskStatus = {
+  PENDING: "Pendiente",
+  ACTIVE: "Activa",
+  COMPLETED: "Finalizada",
+};
+
 const TaskSchema = mongoose.Schema({
   title: {
     type: String,
@@ -8,6 +14,12 @@ const TaskSchema = mongoose.Schema({
   description: {
     type: String,
     required: true,
+  },
+  status: {
+    type: String,
+    required: true,
+    enum: [taskStatus.PENDING, taskStatus.ACTIVE, taskStatus.COMPLETED],
+    default: taskStatus.PENDING,
   },
   creationDate: {
     type: Date,
