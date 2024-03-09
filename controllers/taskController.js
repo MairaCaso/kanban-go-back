@@ -41,7 +41,7 @@ exports.updateTask = async (req, res) => {
   try {
     // Creamos una constante para hacer desestructuración de objetos
     // esto es para extraer los valores que nos envia el usuario
-    const { title, description } = req.body;
+    const { title, description, status } = req.body;
     // Para acceder al id de la tarea
     let taskToUpdate = await Task.findById(req.params.id);
     // Si la tarea no existe
@@ -51,6 +51,7 @@ exports.updateTask = async (req, res) => {
     // Cuando se encuentre la tarea se podrá actualizar los datos
     taskToUpdate.title = title;
     taskToUpdate.description = description;
+    taskToUpdate.status = status;
     // Se actualiza la nueva tarea
     taskToUpdate = await Task.findOneAndUpdate(
       { _id: req.params.id },
